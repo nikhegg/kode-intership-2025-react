@@ -22,5 +22,5 @@ export interface UserCardProps {
 }
 
 export interface UserListProps {
-    users: Array<UserInfo | null>
+    users: Array<UserInfo> | null
 }
