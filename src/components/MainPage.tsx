@@ -1,6 +1,8 @@
+import TopAppBar from "./mainpage/TopAppBar";
+
 function MainPage() {
     return (
-        <h1>MainPage return</h1>
+        <TopAppBar />
     )
 }
 
