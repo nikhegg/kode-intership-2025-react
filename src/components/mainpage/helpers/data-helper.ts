@@ -1,4 +1,3 @@
-import { isFormElement } from "react-router-dom/dist/dom";
 import { CategoryStructure } from "../types";
 
 export const filterCategories: Array<CategoryStructure> = [

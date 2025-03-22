@@ -1,13 +1,14 @@
-import { UserListProps } from "./types";
+import { UserInfo, UserListProps } from "./types";
 import UserCard from "./UserCard";
 import "./styles/UserList.css"
 
 function UserList(props: UserListProps) {
-    let users = props.users
-    if(users.length == 0) { // Fill with 15 skeletons
-        for(let i = 0; i < 15; i++) {
-            users.push(null)
-        }
+    
+    let users: Array<UserInfo>
+    if(props.users) {
+        users = props.users as Array<UserInfo>
+    } else {
+        users = new Array(15).fill(null)
     }
 
     return (

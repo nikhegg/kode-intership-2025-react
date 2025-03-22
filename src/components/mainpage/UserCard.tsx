@@ -1,6 +1,6 @@
 import { UserCardProps } from "./types";
-import "./styles/UserCard.css"
 import { getExtendedClass } from "./helpers";
+import "./styles/UserCard.css"
 
 function UserCard(props: UserCardProps) {
     let user = props.user
@@ -22,7 +22,7 @@ function UserCard(props: UserCardProps) {
         <div className={getExtendedClass(user == null, "user-card", "skeleton")}>
             <div className="user-avatar">
                 { user?.avatarUrl ? (
-                    <img src={user.avatarUrl} draggable={false} />
+                    <img src={user.avatarUrl} alt={`${user?.firstName} ${user?.lastName}`} draggable={false} />
                 ) : (null) }
             </div>
             <div className="user-info">
