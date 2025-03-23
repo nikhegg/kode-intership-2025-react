@@ -23,7 +23,7 @@
         },
         "categories": {
             "all": "All",
-            "designers": "Design",
+            "design": "Design",
             "analytics": "Analytics",
             "management": "Management",
             "qa": "QA",

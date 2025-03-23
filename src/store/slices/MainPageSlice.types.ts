@@ -6,10 +6,16 @@ export interface UserSearchParams {
     department: string
 }
 
+export interface CacheStructure {
+    key: string,
+    users: Array<UserInfo>,
+    timestamp: EpochTimeStamp
+}
+
 export interface MainPageSliceState {
     isLoading: boolean,
     users: Array<UserInfo>,
-    usersCache: Array<UserInfo>,
+    cache: Array<CacheStructure>,
     error: boolean ,
     category: string,
     search: UserSearchParams

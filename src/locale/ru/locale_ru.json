@@ -23,7 +23,7 @@
         },
         "categories": {
             "all": "Все",
-            "designers": "Дизайн",
+            "design": "Дизайн",
             "analytics": "Аналитика",
             "management": "Менеджмент",
             "qa": "QA",
