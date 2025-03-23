@@ -1,10 +1,7 @@
 import { instance } from "./api.instance";
 
 export const usersAPI = {
-    getUsers: () => {
-        return instance.get("mocks/kode-frontend-team/koder-stoplight/86566464/users?__example=all")
-    },
-    getUsersByDepartment: (department: string) => {
+    getUsers: (department?: string) => {
         return instance.get(`mocks/kode-frontend-team/koder-stoplight/86566464/users?__example=${department}`)
     }
 }

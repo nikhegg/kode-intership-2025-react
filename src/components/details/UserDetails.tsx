@@ -1,14 +1,36 @@
 import InfoPanel from "./InfoPanel";
+import { calculateAge, formatDate, formatPhoneNumber } from "./helpers";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../store/hooks";
 import "./styles/UserDetails.css"
-import ChevronLeftIcon from "../../assets/chevron_left.png"
-import StarIcon from "../../assets/profile/star.png"
-import PhoneIcon from "../../assets/profile/phone.png"
-import { useNavigate } from "react-router-dom";
+// Icons
+import {ChevronLeftIcon, StarIcon, PhoneIcon} from "../../assets/index"
+import { useEffect } from "react";
 
 function UserDetails() {
     let navigate = useNavigate()
+    const isLoading = useAppSelector((state) => (state.isLoading))
 
-    return (
+    // API не даёт пользователей ID, придётся брать из единственного эндпоинта
+    let location = useLocation()
+    let id = location.pathname.split("/profile/").pop() as string
+    const users = useAppSelector((state) => state.usersCache)
+    let user = users.find(x => x.id == id)
+    if(id.startsWith("/profile") || id == "") {
+        navigate("/")
+        return
+    }
+    useEffect(() => {
+        if(!user && !isLoading) {
+            navigate("/error")
+            return
+        }
+        if(!user) return
+        document.title = `KODE | ${user?.firstName} ${user?.lastName}`
+        return () => {document.title = `KODE | Поиск`}
+    }, [users])
+    if(user) {
+        return (
         <div className="user-details">
             <div className="user-banner">
                 <div className="back-block">
@@ -17,25 +39,26 @@ function UserDetails() {
                     </div>
                 </div>
                 <div className="user-block">
-                    <img src="https://24ai.tech/ru/wp-content/uploads/sites/4/2023/10/01_product_1_sdelat-izobrazhenie-1-1-5-scaled.jpg" alt="" draggable={false}/>
+                    <img src={ user.avatarUrl} alt="" draggable={false}/>
                     <div className="user-info">
                         <div className="user-title">
-                            <div>Алиса Иванова</div>
-                            <div>al</div>
+                            <div>{ user.firstName } { user.lastName }</div>
+                            <div>{ user.userTag }</div>
                         </div>
-                        <div className="user-position">Designer</div>
+                        <div className="user-position">{ user?.position }</div>
                     </div>
                 </div>
             </div>
             <div className="user-data-container">
                 <div className="user-data">
-                    <InfoPanel icon={StarIcon} placeholder="5 июня 1996" description="24 года" />
+                    <InfoPanel icon={StarIcon} placeholder={formatDate(user.birthday)} description={calculateAge(user.birthday)} />
                     <hr />
-                    <InfoPanel icon={PhoneIcon} placeholder="+7 (999) 900 99 99" description="" />
+                    <InfoPanel icon={PhoneIcon} placeholder={formatPhoneNumber(user.phone)} description="" href={`tel:${user.phone}`}/>
                 </div>
             </div>
         </div>
-    )
+        )
+    }
 }
 
 export default UserDetails;

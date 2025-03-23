@@ -1,10 +1,18 @@
 import { UserInfo } from "../../components/mainpage/types/index"
 
+export interface UserSearchParams {
+    sortType: string,
+    searchString: string,
+    department: string
+}
+
 export interface MainPageSliceState {
     isLoading: boolean,
     users: Array<UserInfo>,
+    usersCache: Array<UserInfo>,
     error: boolean ,
-    category: string
+    category: string,
+    search: UserSearchParams
 }
 
 export interface USERS_FETCH_START {

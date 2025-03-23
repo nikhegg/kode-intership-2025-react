@@ -4,8 +4,17 @@
     flex-wrap: nowrap;
     align-items: center;
     cursor: pointer;
+    border-radius: 20px;
 }
-
+.user-card:hover {
+    background: var(--theme-background);
+}
+.user-card > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
 .user-card .user-avatar {
     width: 72px;
     height: 72px;
@@ -39,12 +48,17 @@
     color: var(--text-unselected);
     font-size: 14px;
 }
-
 .user-card .user-position {
     font-size: 13px;
     font-weight: 400;
     line-height: 16px;
     color: var(--text-desc);
+}
+.user-card .user-birthday {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-left: auto;
 }
 
 .user-card.skeleton .user-name {
@@ -64,6 +78,9 @@
     background: linear-gradient(90deg, #F3F3F6 0px, #FAFAFA 40px, #F3F3F6 80px);
     background-size: 600px;
     animation: shine 1.6s infinite linear;
+}
+.user-card.skeleton:hover {
+    background: none;
 }
 @keyframes shine {
     0% {

@@ -1,14 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { usersAPI } from "./users";
+import { isAxiosError } from "axios";
 
 const usersThunkName = "MainPageUsers"
 
-export const usersRequest = createAsyncThunk(usersThunkName, async(_, thunkApi) => {
+export const usersRequest = createAsyncThunk(usersThunkName, async(department: string, thunkApi) => {
 		try {
-			let response = await usersAPI.getUsers()
+			let response = await usersAPI.getUsers(department)
 			return response.data
-    	} catch(error) {
-			return thunkApi.rejectWithValue(true)
+    	} catch(error: unknown) {
+			if(isAxiosError(error)) {
+				if(error.status == 404) return {items: []}
+				return thunkApi.rejectWithValue(true)
+			}
 		}
 	}
 )

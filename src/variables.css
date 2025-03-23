@@ -8,7 +8,7 @@
     --text-desc: #55555C;
     --text-unselected: #97979B;
     
-    /* Inputs */
-    --input-background: #F7F7F8;
-    --input-placeholder-color: #C3C3C6;
+    /* Themed colors */
+    --theme-background: #F7F7F8;
+    --theme-placeholder: #C3C3C6;
 }

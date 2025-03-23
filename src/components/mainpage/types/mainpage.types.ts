@@ -5,7 +5,7 @@ export interface CategoryStructure {
 
 export interface UserInfo {
     id: string,
-    avatarUrl: string,
+    avatarUrl?: string,
     firstName: string,
     lastName: string,
     userTag: string,
@@ -14,13 +14,23 @@ export interface UserInfo {
         "backend" | "support" | "analytics",
     position: string,
     birthday: string,
-    phone: string
+    phone: string,
+    email?: string
 }
 
 export interface UserCardProps {
-    user: UserInfo | null
+    user: UserInfo | null,
+    showBirthday?: boolean
 }
 
 export interface UserListProps {
     users: Array<UserInfo> | null
+}
+
+export interface SortSelectProps {
+    onClose: Function | undefined
+}
+
+export interface YearDividerProps {
+    year: string | number
 }

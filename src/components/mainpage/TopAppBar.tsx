@@ -1,29 +1,59 @@
-import { useState } from "react"
-import MagnifierIcon from "../../assets/searchbar/search.svg"
-import SortIcon from "../../assets/searchbar/sort.png"
-import { categoryButtonClick, filterCategories, getExtendedClass } from "./helpers"
+import { ChangeEvent, useState } from "react"
+import { filterCategories, getExtendedClass } from "./helpers"
+import SortSelect from "./SortSelect"
+import { useAppDispatch, useAppSelector } from "../../store/hooks"
+import { setDepartmentFilter, setSearchString } from "../../store/slices/MainPageSlice"
+import { usersRequest } from "../../store/api/getUsers"
+import { SearchIcon, SearchIconDark, SortIcon, SelectedSortIcon } from "../../assets/index"
 import "./styles/TopAppBar.css"
 
 function TopAppBar() {
-    let [chosenCategory, setCategory] = useState(filterCategories[0].key)
+    const [ popupActive, setPopupActive ] = useState(false)
+    const [ searchActive, setSearchActive ] = useState(false)
+
+    const searchString = useAppSelector((state) => (state.search.searchString))
+    const selectedCategory = useAppSelector((state) => (state.search.department))
+    const sortType = useAppSelector((state) => (state.search.sortType))
+
+    let displaySortIcon = SortIcon
+    if(sortType != "alphabet") displaySortIcon = SelectedSortIcon
+
+    const dispatch = useAppDispatch()
+    function handleTyping(event: ChangeEvent<HTMLInputElement>) {  
+        dispatch(setSearchString(event.target.value))
+    }
+    function handleCategoryClick(index: number) {
+        let key = filterCategories[index].key
+        if(key == selectedCategory) return
+        dispatch(setDepartmentFilter(key))
+        dispatch(usersRequest(key))
+    }
 
     return (
+        <>
+        { popupActive ? (
+            <SortSelect onClose={() => setPopupActive(false)}/>
+        ) : (null)}
         <div className="top-app-bar">
             <h1>Поиск</h1>
             <div className="search-input">
-                <img src={ MagnifierIcon } alt="Search" draggable={ false }/>
-                <input type="text" placeholder="Введи имя, тег, почту..."/>
-                <img src={ SortIcon } style={{height:"12px"}} alt="Sort" draggable={ false }/>
+                <img src={ searchActive ? SearchIconDark : SearchIcon } alt="Search" draggable={ false }/>
+                <input type="text" placeholder="Введи имя, тег, почту..."
+                value={searchString} onChange={handleTyping}
+                onFocus={() => setSearchActive(true)}
+                onBlur={() => setSearchActive(false)}/>
+                <img src={ displaySortIcon } onClick={() => setPopupActive(true)} style={{height:"12px"}} alt="Sort" draggable={ false }/>
             </div>
 
             <div className="search-filters">
                 {filterCategories.map((category, index) => (
-                    <div key={index} className={getExtendedClass(chosenCategory == category.key, "search-filter-button", "selected")} onClick={() => categoryButtonClick(index, setCategory)}>
+                    <div key={index} className={getExtendedClass(selectedCategory == category.key, "search-filter-button", "selected")} onClick={() => handleCategoryClick(index)}>
                         {category.name}
                     </div>
                 ))}
             </div>
         </div>
+        </>
     )
 }
 
