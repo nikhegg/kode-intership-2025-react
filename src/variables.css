@@ -1,0 +1,14 @@
+:root {
+    /* Main colors */
+    --main-background: white;
+    --accent-color: #6534FF;
+    
+    /* Text */
+    --text-main: #050510;
+    --text-desc: #55555C;
+    --text-unselected: #97979B;
+    
+    /* Themed colors */
+    --theme-background: #F7F7F8;
+    --theme-placeholder: #C3C3C6;
+}

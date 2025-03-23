@@ -1,0 +1,197 @@
+.top-app-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 152px;
+    min-width: 100%;
+    border-bottom: 1px solid var(--theme-placeholder);
+}
+.top-app-bar .top-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.top-app-bar h1 {
+    margin: 16px 0 12px 24px;
+    user-select: none;
+}
+.top-app-bar .lang-switch {
+    float: right;
+    position: relative;
+    margin: 16px 24px 12px 0;
+    user-select: none;
+}
+.top-app-bar .lang-switch .switch-body {
+    /* background: var(--theme-background); */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-unselected);
+    background: var(--main-background);
+    font-size: 14px;
+    transition: .3s;
+    border: 1px solid var(--theme-background);
+}
+.top-app-bar .lang-switch .switch-body:hover {
+    color: var(--text-desc);
+}
+.top-app-bar .lang-switch .switch-body > div {
+    margin: 5px 10px;
+    margin-right: 0;
+}
+.top-app-bar .lang-switch img {
+    margin: 0 15px;
+    transition: .3s;
+}
+.top-app-bar .lang-switch img.chevron_up {
+    transform: rotate(-90deg);
+}
+.top-app-bar .lang-switch img.chevron_down {
+    transform: rotate(-270deg);
+}
+.top-app-bar .lang-switch .lang-dropdown {
+    display: none;
+    position: absolute;
+    background: var(--main-background);
+    min-width: 140px;
+    right: 0;
+    z-index: 1;
+    margin-top: 5px;
+    border-radius: 10px;
+    filter: drop-shadow(0 1px 5px rgba(0,0,0,0.05));
+    border: 1px solid var(--theme-background);
+    overflow: auto;
+}
+.top-app-bar .lang-switch .lang-dropdown.opened {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.top-app-bar .lang-switch .lang-button {
+    width: 100%;
+    height: 32px;
+    margin: 0;
+    color: var(--text-unselected);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: 14px;
+    transition: .3s;
+    cursor: pointer;
+}
+.top-app-bar .lang-switch .lang-button:hover {
+    background: var(--theme-background);
+    color: var(--text-desc);
+}
+.top-app-bar .lang-switch .lang-button img {
+    width: 20px;
+    aspect-ratio: 128/85;
+    filter: drop-shadow(0 0px 5px rgba(0,0,0,.1));
+}
+.search-input {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 16px;
+    padding: 8px 12px;
+    background-color: var(--theme-background);
+    color: var(--theme-placeholder);
+    border-radius: 16px;
+}
+.search-input img {
+    color: inherit;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.search-input img:last-child {
+    margin-left: auto;
+}
+.search-input input {
+    background: none;
+    border: none;
+    font-size: 15px;
+    line-height: 20px;
+    flex-grow: 1;
+    caret-color: var(--accent-color);
+}
+.search-input input::placeholder {
+    color: var(--theme-placeholder);
+    font-weight: 500;
+}
+
+.search-input input:focus {
+    outline: none;
+}
+.search-input input:focus::placeholder {
+    color: transparent;
+}
+.search-filters {
+    max-width: 100%;
+    background: var(--main-background);
+    font-size: 15px;
+    line-height: 20px;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-top: auto;
+}
+.search-filters::before {
+    background: linear-gradient(90deg, white, hsla(0,0,100%,0));
+    content: "";
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    width: 30px;
+    z-index:10;
+}
+.search-filter-button {
+    padding: 8px 12px;
+    cursor: pointer;
+    user-select: none;
+    color: var(--text-unselected);
+    white-space: nowrap;
+}
+.search-filter-button:hover {
+    color: var(--text-desc)
+}
+.search-filter-button:first-child {
+    margin-left: 16px;
+}
+.search-filter-button:last-child {
+    margin-right: 16px;
+}
+.search-filter-button.selected {
+    border-bottom: 2px solid var(--accent-color);
+    color: var(--text-main);
+}
+
+/* Connection error case */
+.top-app-bar.connection-lost {
+    background: #F44336;
+}
+.top-app-bar.connecting {
+    background: #6534FF;
+}
+.top-app-bar.connection-lost h1, .top-app-bar.connecting h1 {
+    color: white;
+}
+.connection-error-wrapper {
+    width: 100%;
+    height: 100%;
+}
+.connection-error {
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16px;
+    margin: 8px 0 0 24px;
+}
