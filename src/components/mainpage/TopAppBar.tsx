@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react"
-import { filterCategories, getExtendedClass } from "./helpers"
+import { useTranslation } from "react-i18next"
+import { getFilterCategories, getExtendedClass } from "./helpers"
 import SortSelect from "./SortSelect"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { setDepartmentFilter, setSearchString } from "../../store/slices/MainPageSlice"
@@ -8,6 +9,8 @@ import { SearchIcon, SearchIconDark, SortIcon, SelectedSortIcon } from "../../as
 import "./styles/TopAppBar.css"
 
 function TopAppBar() {
+    const [t, _] = useTranslation("locale")
+
     const [ popupActive, setPopupActive ] = useState(false)
     const [ searchActive, setSearchActive ] = useState(false)
 
@@ -22,6 +25,7 @@ function TopAppBar() {
     function handleTyping(event: ChangeEvent<HTMLInputElement>) {  
         dispatch(setSearchString(event.target.value))
     }
+    const filterCategories = getFilterCategories()
     function handleCategoryClick(index: number) {
         let key = filterCategories[index].key
         if(key == selectedCategory) return
@@ -35,10 +39,13 @@ function TopAppBar() {
             <SortSelect onClose={() => setPopupActive(false)}/>
         ) : (null)}
         <div className="top-app-bar">
-            <h1>Поиск</h1>
+            <div className="top-title">
+                <h1>{t("main.top_app_bar.title")}</h1>
+                <div className="language-switch"></div>
+            </div>
             <div className="search-input">
                 <img src={ searchActive ? SearchIconDark : SearchIcon } alt="Search" draggable={ false }/>
-                <input type="text" placeholder="Введи имя, тег, почту..."
+                <input type="text" placeholder={t("main.top_app_bar.search_placeholder")}
                 value={searchString} onChange={handleTyping}
                 onFocus={() => setSearchActive(true)}
                 onBlur={() => setSearchActive(false)}/>

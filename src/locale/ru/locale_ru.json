@@ -1,0 +1,51 @@
+{
+    "main": {
+        "system": {
+            "document_title": "KODE | Поиск"
+        },
+        "errors": {
+            "critical_error_text": "Какой-то сверхразум все сломал",
+            "fix_in_progress": "Постараемся быстро починить",
+            "try_again": "Попробовать снова",
+
+            "no_users_found": "Мы никого не нашли",
+            "try_change_request": "Попробуй скорректировать запрос"
+        },
+        "top_app_bar": {
+            "title": "Поиск",
+            "search_placeholder": "Введи имя, тег, почту..."
+        },
+        "sort": {
+            "title": "Сортировка",
+            "alphabet": "По алфавиту",
+            "birthday": "По дню рождения"
+        },
+        "categories": {
+            "all": "Все",
+            "designers": "Дизайн",
+            "analytics": "Аналитика",
+            "management": "Менеджмент",
+            "qa": "QA",
+            "ios": "iOS",
+            "android": "Android",
+            "back_office": "Бэк-офис",
+            "frontend": "Frontend",
+            "hr": "HR",
+            "pr": "PR",
+            "support": "Поддержка",
+            "backend": "Backend"
+        }
+    },
+    "profile": {
+        "age": {
+            "one": "{{age}} год",
+            "first": "{{age}} год",
+            "second": "{{age}} года",
+            "third": "{{age}} лет"
+        }
+    },
+    "404": {
+        "page_not_found": "Страница не найдена",
+        "back_to_home": "Перейти на главную"
+    }
+}

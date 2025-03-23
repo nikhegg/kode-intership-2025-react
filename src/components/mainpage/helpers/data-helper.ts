@@ -1,19 +1,20 @@
+import { useTranslation } from "react-i18next";
 import { CategoryStructure } from "../types";
 
-export const filterCategories: Array<CategoryStructure> = [
-    { key:"all", name:"Все" },
-    { key:"designers", name: "Дизайн" },
-    { key:"analytics", name: "Аналитика" },
-    { key:"management", name: "Менеджмент" },
-    { key:"qa", name: "QA"},
-    { key:"ios", name:"iOS" },
-    { key:"android", name:"Android" },
-    { key:"back_office", name:"Бэк-офис" },
-    { key:"frontend", name:"Frontend" },
-    { key:"hr", name:"HR" },
-    { key:"pr", name:"PR" },
-    { key:"backend", name:"Backend" }
-]
+export function getFilterCategories(): Array<CategoryStructure> {
+    const [t, _] = useTranslation("locale")
+    let categories: Array<string | CategoryStructure> = ["all", "designers", "analytics", "management",
+        "qa", "ios", "android", "back_office", "frontend", "hr",
+        "pr", "support", "backend"]
+    for(let i = 0; i < categories.length; i++) {
+        let key = categories[i]
+        categories[i] = {
+            key,
+            name: t(`main.categories.${key}`)
+        } as CategoryStructure
+    }
+    return categories as Array<CategoryStructure>
+}
 
 export function getExtendedClass(shouldExtend: boolean, baseClass: string, extension: string): string {
     let classStr = baseClass
@@ -23,7 +24,6 @@ export function getExtendedClass(shouldExtend: boolean, baseClass: string, exten
 
 export function formatDateToYear(date: Date | string) {
     if(typeof date == "string") date = new Date(date)
-    // debugger;
     return date.toLocaleDateString("ru-RU", {
         year: "numeric"
     })
@@ -37,12 +37,4 @@ export function getNextBirthdayYear(birthday: Date | string) {
     let nextBirthday = new Date(currentYear, birthDate.getMonth(), birthDate.getDate())
     
     return ((nextBirthday < today) ? currentYear + 1 : currentYear)
-}
-
-export function formatDateToDay(date: Date | string) {
-    if(typeof date == "string") date = new Date(date)
-    return date.toLocaleDateString("ru-RU", {
-        day: "numeric",
-        month: "short"
-    }).replace(".", "")
 }

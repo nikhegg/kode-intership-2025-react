@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import TopAppBar from "./mainpage/TopAppBar";
 import UserList from "./mainpage/UserList";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -9,6 +10,9 @@ import "../index.css"
 import "./mainpage/styles/MainPage.css"
 
 function MainPage() {
+    const [t, _] = useTranslation("locale")
+    
+
     const users = useAppSelector((state) => (state.users))
     const isLoading = useAppSelector((state) => (state.isLoading))
     const err = useAppSelector((state) => (state.error))
@@ -19,21 +23,21 @@ function MainPage() {
         onClick: () => {
             dispatch(usersRequest(department))
         },
-        text: "Попробовать снова"
+        text: t("main.errors.try_again")//"Попробовать снова"
     }
     return (
         <div className="wrapper">
             <TopAppBar />
-            {err ? (
+            {err ? 
                 <PageLoadFail
                 icon={FlyingSaucerIcon}
-                title="Какой-то сверхразум все сломал"
-                descriptiption="Постараемся быстро починить"
+                title={t("main.errors.critical_error_text")}
+                descriptiption={t("main.errors.fix_in_progress")}
                 button={button}
                 />
-            ) : (
+            :
                 <UserList users={isLoading ? (null) : (users)} />
-            )}
+            }
         </div>
     )
 }
