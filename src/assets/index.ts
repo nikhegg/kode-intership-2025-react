@@ -9,3 +9,7 @@ export { default as ChevronLeftIcon } from "./chevron_left.png"
 export { default as CrossIcon } from "./close.svg"
 export { default as FlyingSaucerIcon } from "./flying-saucer.png"
 export { default as MagnifierIcon } from "./magnifying-glass.svg"
+
+// Flags
+export { default as AmericanFlag } from "./languages/english.png"
+export { default as RussianFlag } from "./languages/russian.jpg"
