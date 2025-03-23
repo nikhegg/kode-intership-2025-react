@@ -1,0 +1,52 @@
+{
+    "language": "Language",
+    "main": {
+        "system": {
+            "document_title": "KODE | Search"
+        },
+        "errors": {
+            "critical_error_text": "Oops! Bad things happen...",
+            "fix_in_progress": "We're trying to fix it ASAP",
+            "try_again": "Try again",
+
+            "no_users_found": "We found nobody",
+            "try_change_request": "Try to change your request"
+        },
+        "top_app_bar": {
+            "title": "Search",
+            "search_placeholder": "Enter name, tag, email..."
+        },
+        "sort": {
+            "title": "Sort",
+            "alphabet": "Alphabetically",
+            "birthday": "By birthdays"
+        },
+        "categories": {
+            "all": "All",
+            "designers": "Design",
+            "analytics": "Analytics",
+            "management": "Management",
+            "qa": "QA",
+            "ios": "iOS",
+            "android": "Android",
+            "back_office": "Back-office",
+            "frontend": "Frontend",
+            "hr": "HR",
+            "pr": "PR",
+            "support": "Support",
+            "backend": "Backend"
+        }
+    },
+    "profile": {
+        "age": {
+            "one": "{{age}} year old",
+            "first": "{{age}} years old",
+            "second": "{{age}} years old",
+            "third": "{{age}} years old"
+        }
+    },
+    "404": {
+        "page_not_found": "Page not found",
+        "back_to_home": "Back to home"
+    }
+}

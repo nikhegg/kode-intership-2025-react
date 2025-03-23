@@ -4,11 +4,92 @@
     justify-content: flex-start;
     min-height: 152px;
     min-width: 100%;
-    border-bottom: 1px solid #C3C3C6;
+    border-bottom: 1px solid var(--theme-placeholder);
+}
+.top-app-bar .top-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .top-app-bar h1 {
     margin: 16px 0 12px 24px;
     user-select: none;
+}
+.top-app-bar .lang-switch {
+    float: right;
+    position: relative;
+    margin: 16px 24px 12px 0;
+    user-select: none;
+}
+.top-app-bar .lang-switch .switch-body {
+    /* background: var(--theme-background); */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-unselected);
+    font-size: 14px;
+    transition: .3s;
+    border: 1px solid var(--theme-background);
+}
+.top-app-bar .lang-switch .switch-body:hover {
+    color: var(--text-desc);
+}
+.top-app-bar .lang-switch .switch-body > div {
+    margin: 5px 10px;
+    margin-right: 0;
+}
+.top-app-bar .lang-switch img {
+    margin: 0 15px;
+    transition: .3s;
+}
+.top-app-bar .lang-switch img.chevron_up {
+    transform: rotate(-90deg);
+}
+.top-app-bar .lang-switch img.chevron_down {
+    transform: rotate(-270deg);
+}
+.top-app-bar .lang-switch .lang-dropdown {
+    display: none;
+    position: absolute;
+    background: var(--main-background);
+    min-width: 140px;
+    right: 0;
+    z-index: 1;
+    margin-top: 5px;
+    border-radius: 10px;
+    filter: drop-shadow(0 1px 5px rgba(0,0,0,0.05));
+    border: 1px solid var(--theme-background);
+    overflow: auto;
+}
+.top-app-bar .lang-switch .lang-dropdown.opened {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.top-app-bar .lang-switch .lang-button {
+    width: 100%;
+    height: 32px;
+    margin: 0;
+    color: var(--text-unselected);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: 14px;
+    transition: .3s;
+    cursor: pointer;
+}
+.top-app-bar .lang-switch .lang-button:hover {
+    background: var(--theme-background);
+    color: var(--text-desc);
+}
+.top-app-bar .lang-switch .lang-button img {
+    width: 20px;
+    aspect-ratio: 128/85;
+    filter: drop-shadow(0 0px 5px rgba(0,0,0,.1));
 }
 .search-input {
     display: flex;
@@ -19,7 +100,7 @@
     margin: 6px 16px;
     padding: 8px 12px;
     background-color: var(--theme-background);
-    color: #C3C3C6;
+    color: var(--theme-placeholder);
     border-radius: 16px;
 }
 .search-input img {

@@ -6,8 +6,11 @@ import YearDivider from "./YearDivider";
 import { MagnifierIcon } from "../../assets/index"
 import "./styles/UserList.css"
 import { getNextBirthdayYear } from "./helpers";
+import { useTranslation } from "react-i18next";
 
 function UserList(props: UserListProps) {
+    const [t, _] = useTranslation("locale")
+
     const sortType = useAppSelector((state) => (state.search.sortType))
 
     let users: Array<UserInfo>
@@ -22,7 +25,7 @@ function UserList(props: UserListProps) {
         <div className="user-list-container">
             <div className="user-list">
                 {users.length == 0 ? 
-                <PageLoadFail icon={ MagnifierIcon } title="Мы никого не нашли" descriptiption="Попробуй скорректировать запрос"/>
+                <PageLoadFail icon={ MagnifierIcon } title={t("main.errors.no_users_found")} descriptiption={t("main.errors.try_change_request")}/>
                 : users.map((value, index) => {
                     let userCard = <UserCard key={index} user={value} showBirthday={sortType == "birthday"}/>
                     if(!value || sortType != "birthday") return userCard

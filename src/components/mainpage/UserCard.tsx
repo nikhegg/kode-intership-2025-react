@@ -1,14 +1,25 @@
 import { UserCardProps } from "./types";
-import { formatDateToDay, getExtendedClass } from "./helpers";
+import { getExtendedClass } from "./helpers";
 import { useNavigate } from "react-router-dom";
 import "./styles/UserCard.css"
+import { useTranslation } from "react-i18next";
 
 function UserCard(props: UserCardProps) {
+    const [_, i18next] = useTranslation("locale")
     let user = props.user
     let navigate = useNavigate();
     function handleUserCardClick() {
         if(user == null) return
         navigate(`/profile/${user.id}`)
+    }
+
+
+    function formatDateToDay(date: Date | string) {
+        if(typeof date == "string") date = new Date(date)
+        return date.toLocaleDateString(i18next.language, {
+            day: "numeric",
+            month: "short"
+        }).replace(".", "")
     }
 
     return (
