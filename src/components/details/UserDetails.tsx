@@ -15,7 +15,7 @@ function UserDetails() {
     // API не даёт пользователей ID, придётся брать из единственного эндпоинта
     let location = useLocation()
     let id = location.pathname.split("/profile/").pop() as string
-    const users = useAppSelector((state) => state.usersCache)
+    const users = useAppSelector((state) => state.users)
     let user = users.find(x => x.id == id)
     if(id.startsWith("/profile") || id == "") {
         navigate("/")

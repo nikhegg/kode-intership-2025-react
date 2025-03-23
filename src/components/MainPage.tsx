@@ -12,7 +12,6 @@ import "./mainpage/styles/MainPage.css"
 function MainPage() {
     const [t, _] = useTranslation("locale")
     
-
     const users = useAppSelector((state) => (state.users))
     const isLoading = useAppSelector((state) => (state.isLoading))
     const err = useAppSelector((state) => (state.error))

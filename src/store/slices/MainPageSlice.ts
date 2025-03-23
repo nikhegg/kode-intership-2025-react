@@ -11,7 +11,7 @@ const initialState: MainPageSliceState = {
     isLoading: true,
     error: false,
     users: [],
-    usersCache: [],
+    cache: [],
     search: {
         sortType: "alphabet",
         searchString: "",
@@ -63,21 +63,32 @@ function sortUsers(users: Array<UserInfo>, params: UserSearchParams) {
     return users
 }
 
+function getUsersFromCache(state: MainPageSliceState) {
+    let cacheIndex = state.cache.findIndex(x => x.key == state.search.department)
+    let usersCache = new Array<UserInfo>()
+    if(cacheIndex != -1) usersCache = state.cache[cacheIndex].users
+    return usersCache
+}
+
+
 export const mainPageSlice = createSlice({
     name: mainPageSliceName,
     initialState: initialState,
     reducers: {
         setDepartmentFilter: (state, action: PayloadAction<string>) => {
             state.search.department = action.payload
-            state.users = sortUsers(state.usersCache, state.search)
+            let cache = getUsersFromCache(state)
+            state.users = sortUsers(cache, state.search)
         },
         setSearchString: (state, action: PayloadAction<string>) => {
             state.search.searchString = action.payload
-            state.users = sortUsers(state.usersCache, state.search)
+            let cache = getUsersFromCache(state)
+            state.users = sortUsers(cache, state.search)
         },
         setSort: (state, action: PayloadAction<string>) => {
             state.search.sortType = action.payload
-            state.users = sortUsers(state.usersCache, state.search)
+            let cache = getUsersFromCache(state)
+            state.users = sortUsers(cache, state.search)
         }
     },
     extraReducers: (builder) => {
@@ -87,16 +98,28 @@ export const mainPageSlice = createSlice({
         })
         builder.addCase(usersRequest.fulfilled, (state, action) => {
             state.isLoading = false
-            state.usersCache = action.payload.items
+            if(!action.payload?.cached && action.payload?.cacheKey) {
+                let cacheIndex = state.cache.findIndex(x => x.key == action.payload?.cacheKey)
+                if(cacheIndex == -1) state.cache.push({
+                    key: action.payload.cacheKey,
+                    users: action.payload.data.items,
+                    timestamp: new Date().getTime()
+                })
+                else {
+                    state.cache[cacheIndex].users = action.payload.data.items
+                    state.cache[cacheIndex].timestamp = new Date().getTime()
+                }
+            }
+            let newCacheIndex = state.cache.findIndex(x => x.key == action.payload?.cacheKey)
             
             // Предоставленные в API avatarUrl не возвращали изображение
-            state.usersCache.forEach((user, index) => {
+            if(!action.payload?.cached) state.cache[newCacheIndex].users.forEach((user, index) => {
                 // Fallback значение, если нет аватарки
                 if(!user.avatarUrl || user.avatarUrl == "") user.avatarUrl = GooseIcon
                 user.avatarUrl = `https://i.pravatar.cc/150?img=${index+1}`
             })
+            state.users = sortUsers(state.cache[newCacheIndex].users, state.search)
 
-            state.users = sortUsers(state.usersCache, state.search)
             state.error = false
         })
         builder.addCase(usersRequest.rejected, (state, action) => {

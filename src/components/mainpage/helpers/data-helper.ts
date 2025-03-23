@@ -3,7 +3,7 @@ import { CategoryStructure } from "../types";
 
 export function getFilterCategories(): Array<CategoryStructure> {
     const [t, _] = useTranslation("locale")
-    let categories: Array<string | CategoryStructure> = ["all", "designers", "analytics", "management",
+    let categories: Array<string | CategoryStructure> = ["all", "design", "analytics", "management",
         "qa", "ios", "android", "back_office", "frontend", "hr",
         "pr", "support", "backend"]
     for(let i = 0; i < categories.length; i++) {

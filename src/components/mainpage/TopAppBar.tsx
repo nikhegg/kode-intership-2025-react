@@ -30,8 +30,9 @@ function TopAppBar() {
     function handleCategoryClick(index: number) {
         let key = filterCategories[index].key
         if(key == selectedCategory) return
-        dispatch(setDepartmentFilter(key))
-        dispatch(usersRequest(key))
+        dispatch(usersRequest(key)).then(() => {
+            dispatch(setDepartmentFilter(key))
+        })
     }
 
     const [languageMenuState, setLanguageMenuState] = useState(false)
