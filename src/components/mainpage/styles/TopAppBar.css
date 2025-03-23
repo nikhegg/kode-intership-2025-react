@@ -30,6 +30,7 @@
     justify-content: center;
     align-items: center;
     color: var(--text-unselected);
+    background: var(--main-background);
     font-size: 14px;
     transition: .3s;
     border: 1px solid var(--theme-background);
@@ -133,6 +134,7 @@
 }
 .search-filters {
     max-width: 100%;
+    background: var(--main-background);
     font-size: 15px;
     line-height: 20px;
     overflow: auto;
@@ -170,4 +172,26 @@
 .search-filter-button.selected {
     border-bottom: 2px solid var(--accent-color);
     color: var(--text-main);
+}
+
+/* Connection error case */
+.top-app-bar.connection-lost {
+    background: #F44336;
+}
+.top-app-bar.connecting {
+    background: #6534FF;
+}
+.top-app-bar.connection-lost h1, .top-app-bar.connecting h1 {
+    color: white;
+}
+.connection-error-wrapper {
+    width: 100%;
+    height: 100%;
+}
+.connection-error {
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16px;
+    margin: 8px 0 0 24px;
 }

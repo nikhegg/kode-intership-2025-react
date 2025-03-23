@@ -14,6 +14,7 @@ export interface CacheStructure {
 
 export interface MainPageSliceState {
     isLoading: boolean,
+    isOnline: boolean,
     users: Array<UserInfo>,
     cache: Array<CacheStructure>,
     error: boolean ,

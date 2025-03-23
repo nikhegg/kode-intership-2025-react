@@ -10,7 +10,10 @@
             "try_again": "Try again",
 
             "no_users_found": "We found nobody",
-            "try_change_request": "Try to change your request"
+            "try_change_request": "Try to change your request",
+
+            "no_network": "Can't update the data. Check your Internet connection.",
+            "network_loading": "Loading. Wait a second..."
         },
         "top_app_bar": {
             "title": "Search",

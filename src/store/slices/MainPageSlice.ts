@@ -7,11 +7,12 @@ import { GooseIcon } from "../../assets";
 const mainPageSliceName: string = "MainPageSlice"
 
 const initialState: MainPageSliceState = {
-    category: "",
     isLoading: true,
+    isOnline: navigator.onLine,
     error: false,
     users: [],
     cache: [],
+    category: "",
     search: {
         sortType: "alphabet",
         searchString: "",
@@ -89,6 +90,9 @@ export const mainPageSlice = createSlice({
             state.search.sortType = action.payload
             let cache = getUsersFromCache(state)
             state.users = sortUsers(cache, state.search)
+        },
+        setNetworkStatus: (state, action: PayloadAction<boolean>) => {
+            state.isOnline = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -130,4 +134,4 @@ export const mainPageSlice = createSlice({
 })
 
 export const { actions, reducer } = mainPageSlice
-export const { setSearchString, setDepartmentFilter, setSort } = mainPageSlice.actions
+export const { setSearchString, setDepartmentFilter, setSort, setNetworkStatus } = mainPageSlice.actions
