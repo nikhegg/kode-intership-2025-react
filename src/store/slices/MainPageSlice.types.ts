@@ -3,7 +3,7 @@ import { UserInfo } from "../../components/mainpage/types/index"
 export interface MainPageSliceState {
     isLoading: boolean,
     users: Array<UserInfo>,
-    error: string | undefined ,
+    error: boolean ,
     category: string
 }
 

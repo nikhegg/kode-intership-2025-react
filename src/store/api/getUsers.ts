@@ -8,7 +8,7 @@ export const usersRequest = createAsyncThunk(usersThunkName, async(_, thunkApi) 
 			let response = await usersAPI.getUsers()
 			return response.data
     	} catch(error) {
-			return thunkApi.rejectWithValue(error)
+			return thunkApi.rejectWithValue(true)
 		}
 	}
 )

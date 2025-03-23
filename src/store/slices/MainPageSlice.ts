@@ -7,7 +7,7 @@ const mainPageSliceName: string = "MainPageSlice"
 const initialState: MainPageSliceState = {
     category: "",
     isLoading: false,
-    error: undefined,
+    error: false,
     users: []
 }
 
@@ -18,14 +18,16 @@ export const mainPageSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(usersRequest.pending, (state) => {
             state.isLoading = true
+            state.error = false
         })
         builder.addCase(usersRequest.fulfilled, (state, action) => {
             state.isLoading = false
             state.users = action.payload.items
+            state.error = false
         })
         builder.addCase(usersRequest.rejected, (state, action) => {
             state.isLoading = false
-            state.error = action.error.message
+            state.error = action.payload as boolean
         })
     }
 })
