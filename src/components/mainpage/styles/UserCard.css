@@ -3,6 +3,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
+    cursor: pointer;
 }
 
 .user-card .user-avatar {

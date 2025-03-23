@@ -1,6 +1,7 @@
 import { UserCardProps } from "./types";
 import { getExtendedClass } from "./helpers";
 import "./styles/UserCard.css"
+import { useNavigate } from "react-router-dom";
 
 function UserCard(props: UserCardProps) {
     let user = props.user
@@ -18,8 +19,14 @@ function UserCard(props: UserCardProps) {
     //     phone:"88005553535"
     // }
 
+    let navigate = useNavigate();
+    function handleUserCardClick() {
+        if(user == null) return
+        navigate(`/profile/${user.id}`)
+    }
+
     return (
-        <div className={getExtendedClass(user == null, "user-card", "skeleton")}>
+        <div className={getExtendedClass(user == null, "user-card", "skeleton")} onClick={handleUserCardClick}>
             <div className="user-avatar">
                 { user?.avatarUrl ? (
                     <img src={user.avatarUrl} alt={`${user?.firstName} ${user?.lastName}`} draggable={false} />
