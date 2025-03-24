@@ -118,9 +118,8 @@ export const mainPageSlice = createSlice({
             
             // Предоставленные в API avatarUrl не возвращали изображение
             if(!action.payload?.cached) state.cache[newCacheIndex].users.forEach((user, index) => {
-                // Fallback значение, если нет аватарки
-                if(!user.avatarUrl || user.avatarUrl == "") user.avatarUrl = GooseIcon
-                user.avatarUrl = `https://i.pravatar.cc/150?img=${index+1}`
+                // API лежит, поэтому у всех будут гуси
+                user.avatarUrl = GooseIcon
             })
             state.users = sortUsers(state.cache[newCacheIndex].users, state.search)
 
